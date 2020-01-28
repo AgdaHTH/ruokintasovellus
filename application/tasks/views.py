@@ -1,25 +1,36 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
+from flask_login import login_required, current_user
+
 from application.tasks.models import Animal
+from application.tasks.forms import AnimalForm
 
 @app.route("/tasks/", methods=["GET"])
 def tasks_index():
     return render_template("tasks/list.html", animals = Animal.query.all())
 
 @app.route("/tasks/new/")
+@login_required
 def tasks_form():
-    return render_template("tasks/new.html")
+    return render_template("tasks/new.html", form = AnimalForm())
 
 @app.route("/tasks/food/") 
 def tasks_add_food():
     return render_template("tasks/food.html")
 
 @app.route("/tasks/", methods=["POST"])
+@login_required
 def tasks_create():
-    #print(request.form.get("name"))
-    t = Animal(request.form.get("name"))
+    form = AnimalForm(request.form)
 
-    db.session().add(t)
+    if not form.validate():
+        return render_template("tasks/new.html", form = form)
+
+
+    animal = Animal(form.name.data)
+    animal.account_id = current_user.id 
+
+    db.session().add(animal)
     db.session().commit()
   
     return redirect(url_for("tasks_index"))
