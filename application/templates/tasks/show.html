@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+
+<!--<table>
+  <tr>        
+    <th>Show animal</th>       
+  </tr>
+  {% for animal in animals %} 
+  <tr>
+    <td>{{ animal.name }}</td> 
+  </tr>
+  {% endfor %}
+</table>
+
+ -->
+
+<form method="GET" action="{{ url_for('tasks_show_animal') }}"> 
+  <input type="text" name="name"/>
+  <input type="submit" value="Kenen tiedot haetaan"/>
+</form>
+
+
+{% endblock %}

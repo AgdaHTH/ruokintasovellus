@@ -14,9 +14,11 @@ def tasks_index():
 def tasks_form():
     return render_template("tasks/new.html", form = AnimalForm())
 
-@app.route("/tasks/food/") 
-def tasks_add_food():
-    return render_template("tasks/food.html")
+@app.route("/tasks/show/", methods=["GET"]) 
+@login_required
+def tasks_show_animal():
+    
+    return render_template("tasks/show.html", animal = Animal.query.filter())
 
 @app.route("/tasks/", methods=["POST"])
 @login_required

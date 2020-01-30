@@ -4,12 +4,17 @@ app = Flask(__name__)
 
 # tietokanta
 from flask_sqlalchemy import SQLAlchemy
-# Käytetään tasks.db-nimistä SQLite-tietokantaa. Kolme vinoviivaa
-# kertoo, tiedosto sijaitsee tämän sovelluksen tiedostojen kanssa
+
+import os
+# kolme vinoviivaa kertoo, että tiedosto sijaitsee tämän sovelluksen tiedostojen kanssa
 # samassa paikassa
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
-# Pyydetään SQLAlchemyä tulostamaan kaikki SQL-kyselyt
-app.config["SQLALCHEMY_ECHO"] = True
+
+if os.environ.get("HEROKU"):
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+    print(os.environ.get("DATABASE_URL"))
+else:    
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
+    app.config["SQLALCHEMY_ECHO"] = True # SQLAlchemy tulostaa kaikki SQL-kyselyt
 
 # Luodaan db-olio, jota käytetään tietokannan käsittelyyn
 db = SQLAlchemy(app)
@@ -39,5 +44,8 @@ login_manager.login_message = "Please login to use this functionality."
 def load_user(user_id):
     return User.query.get(user_id)
 
-# luodaan tietokantataulut tarvittaessa
-db.create_all()
+# luodaan tietokantataulut
+try:
+    db.create_all()
+except:
+    pass
