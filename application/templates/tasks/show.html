@@ -2,23 +2,20 @@
   
 {% block body %}
 
-<!--<table>
+<table>
   <tr>        
-    <th>Show animal</th>       
+    <th>Animal data</th>   
   </tr>
-  {% for animal in animals %} 
   <tr>
-    <td>{{ animal.name }}</td> 
+    <td>name</td>
+    <td>id</td>
+    <td>owner id</td>
   </tr>
-  {% endfor %}
+  <tr>       
+    <td>{{ animal.name }}</td> 
+    <td>{{ animal.id }}</td>
+    <td>{{ animal.account_id }}</td>
+  </tr>
 </table>
-
- -->
-
-<form method="GET" action="{{ url_for('tasks_show_animal') }}"> 
-  <input type="text" name="name"/>
-  <input type="submit" value="Kenen tiedot haetaan"/>
-</form>
-
 
 {% endblock %}
