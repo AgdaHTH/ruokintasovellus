@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+<tr>
+<td>
+  <th>Animals of current user</th>
+</td>  
+</tr>
+</table>
+
+{% for animal in currentanimals %}
+<table cellspacing="4" cellpadding="5">
+    <tr>
+      <td>{{ animal.name }}</td>  
+      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
+      <td></td>
+      <form method="POST" action="{{ url_for('food_add', animal_id=animal.id) }}">
+        <td> {{ form.name.label }} </td>       
+        <td> {{ form.name }}   </td>                                
+        <td colspan="2">
+          <input type="submit" value="Add a new Food"/>
+        </td>          
+      </form>
+    </tr> 
+  </table> 
+{% endfor %}
+  <table>
+    <tr>
+    <td>
+      <th>Foods of animals of current user</th>
+    </td>  
+    </tr>
+    </table>
+    {% for food in currentfoods %}
+    <table>
+      <tr> 
+        <td>{{ food.name }} </td>
+      </tr>
+    </table>
+    {% endfor %}
+  
+{% endblock %}

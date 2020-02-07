@@ -1,13 +1,15 @@
-Tietokanta sis‰lt‰‰ tiedot joukosta el‰imi‰, niiden omistajista sek‰ kunkin el‰imen ruokinnasta ja l‰‰kinn‰st‰.
+Tietokanta sis‰lt‰‰ tiedot joukosta el‰imi‰, niiden omistajista sek‰ kunkin el‰imen ruokinnasta.
 K‰yttˆliittym‰n kautta seuraavat toiminnot ovat mahdollisia:
 
-1. Omistaja voi kirjautua j‰rjestelm‰‰n.
+1. Omistaja voi luoda profiilin j‰rjestelm‰‰n v‰lilehdelt‰ *Add a new user*.
 
-2. Omistaja voi lis‰t‰ itselleen el‰imen.
+2. Kun omistajalla on profiili ja h‰n on kirjautunut sis‰‰n, h‰n voi lis‰t‰ itselleen 
+el‰imen v‰lilehdelt‰ *Add an animal*.
 
-3. Omistaja voi lis‰t‰ el‰imelleen tiedon ruokinnasta tai l‰‰kinn‰st‰ 
-sek‰ muuttaa n‰it‰ tietoja. T‰m‰ edellytt‰‰ j‰rjestelm‰‰n kirjautumista.
+3. Kirjautuneena omistaja voi selata el‰imi‰‰n ja yhteenvetoa niiden ruuista v‰lilehdell‰ *Info for current user*. 
+Siell‰ h‰n voi myˆs lis‰t‰ el‰imelleen syˆtett‰v‰n ruuan. 
 
-3. J‰rjestelm‰n k‰ytt‰j‰ voi selata (mutta ei p‰ivitt‰‰ tai poistaa) eri 
-el‰inten ruokinta- ja l‰‰kit‰tietoja (joko el‰inkohtaisesti tai ruoka/l‰‰ke-
-kohtaisesti). K‰ytt‰j‰ ei voi kirjautua j‰rjestelm‰‰n.
+4. J‰rjestelm‰n k‰ytt‰j‰ (eli el‰inten ruokkija) voi selata eri el‰inten ruokintatietoja sivuilla *List animals*, 
+josta on linkki kunkin el‰imen tietoihin: *Show animal*. T‰t‰ varten k‰ytt‰j‰n ei tarvitse kirjautua j‰rjestelm‰‰n. 
+
+5. Alasivu *Show animal* n‰ytt‰‰ el‰imen nimen, omistajan nimen ja el‰imelle syˆtett‰v‰t ruuat.

@@ -1,19 +1,16 @@
 from application import db
-
-class User(db.Model):
+from application.models import Base
+from sqlalchemy.sql import text
+class User(Base):
 
     __tablename__ = "account"
   
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
-
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
     animals = db.relationship("Animal", backref='account', lazy=True)
+    #back_populates="account" myös mahd
 
     def __init__(self, name, username, password):
         self.name = name
@@ -31,3 +28,34 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+    
+    @staticmethod
+    def find_animals_of_current_user(account_id):
+        
+        stmt = text("SELECT * FROM Animal" 
+        " JOIN Account ON Account.id = Animal.account_id" #tämä rivi on ilmeisesti turha
+        " WHERE account_id = :account_id").params(account_id=account_id)
+        
+        res = db.engine.execute(stmt)
+        
+        response = []
+
+        for row in res:
+            response.append({"id":row[0], "time1":row[1], "time2":row[2], "name":row[3]})
+        return response
+    
+    @staticmethod
+    def find_foods_of_current_user(account_id):
+        stmt = text("SELECT Food.name FROM Food"
+        " LEFT JOIN Animal ON Animal.id = Food.animal_id"
+        " LEFT JOIN Account ON Account.id = Animal.account_id"
+        " WHERE Account.id = :account_id"
+        " GROUP BY Food.name").params(account_id=account_id)
+        
+        res = db.engine.execute(stmt)
+        
+        response = []
+
+        for row in res:
+            response.append({"name":row[0]})
+        return response
