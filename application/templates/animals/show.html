@@ -9,14 +9,19 @@
   <tr>
     <td><b>Name</b></td>   
     <td><b>Owner</b></td>
-    <td><b>Food</b></td>
+    <td><b>Sick</b></td>
+    <td><b>Food</b></td>    
   </tr>
   <tr>       
     <td>{{ animal.name }}</td>   
     <td>{{ owner.name }}</td>
-
+    {% if animal.sick == True %}
+    <td>yes</td>
+    {% else %}
+    <td>no</td>
+    {% endif %}
     {% for food in foods %}
-    <td>{{ food.name }}</td><tr></tr><td></td><td></td> 
+    <td>{{ food.name }}</td><tr></tr><td></td><td></td><td></td> 
     {% endfor %}
     <tr>      
     </tr>

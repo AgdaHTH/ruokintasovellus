@@ -9,5 +9,5 @@ sovelluksessa on myös mahdollisuus luoda uusia käyttäjiä)
 * Käyttötapaukset: https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/userstories.md
 * Tietokantakaavio: https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/tietokantakaavio.pdf
 
-* HUOM1 Sivujen asettelu on osittain kesken.
+* HUOM Sivujen asettelu on osittain kesken.
 

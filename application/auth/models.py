@@ -41,14 +41,14 @@ class User(Base):
         response = []
 
         for row in res:
-            response.append({"id":row[0], "time1":row[1], "time2":row[2], "name":row[3]})
+            response.append({"id":row[0], "time1":row[1], "time2":row[2], "name":row[3], "sick":row[5]})
         return response
     
     @staticmethod
     def find_foods_of_current_user(account_id):
         stmt = text("SELECT Food.name FROM Food"
-        " LEFT JOIN association ON association.food_id = Food.id"
-        " LEFT JOIN Animal ON Animal.id = association.animal_id" 
+        " LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id"
+        " LEFT JOIN Animal ON Animal.id = animalsfoods.animal_id" 
         " LEFT JOIN Account ON Account.id = Animal.account_id"
         " WHERE Account.id = :account_id"
         " GROUP BY Food.name").params(account_id=account_id)

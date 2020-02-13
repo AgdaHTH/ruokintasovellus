@@ -3,13 +3,20 @@
 {% block body %}
   <table>
     <tr>        
-      <th>Animals</th>       
+      <td><b>Animals</b></td>
+      <td></td>  
+      <td></td>     
     </tr>
-    
-    {% for animal in animals %} 
-    <tr>      
+         
+    <tr>   
+      {% for animal in animals %}   
       <td>{{ animal.name }}</td> 
-      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>     
+      {% if animal.sick == True %}
+      <td>sick</td>
+      {% else %}
+      <td>healthy</td>
+      {% endif %}
+      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal details</a></td>     
     </tr>
     {% endfor %}
   

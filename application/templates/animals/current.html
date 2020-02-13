@@ -12,18 +12,28 @@
 {% for animal in currentanimals %}
 <table cellspacing="4" cellpadding="5">
     <tr>
-      <td>{{ animal.name }}</td>  
-      <td><form method="GET" action="{{ url_for('animals_delete', animal_id=animal.id) }}">
-        <input type="submit" value="Delete animal"/></form></td>
+      <td>{{ animal.name }}</td> 
+      {% if animal.sick == 1 %} 
+      <td>sick</td> 
+      {% else %}
+      <td>healthy</td>
+      {% endif %}
       <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
       <td></td>
       <form method="POST" action="{{ url_for('food_add', animal_id=animal.id) }}">
         <td> {{ form.name.label }} </td>       
         <td> {{ form.name }}   </td>                                
         <td colspan="2">
-          <input type="submit" value="Add a new Food"/>
+          <input type="submit" value="Add a new food"/>
         </td>          
       </form>
+      <td>
+        <form method="POST" action="{{ url_for('animals_set_sick', animal_id=animal.id) }}">
+          <input type="submit" value="Animal sick/healthy"/>
+        </form>
+            </td>
+        <td><form method="GET" action="{{ url_for('animals_delete', animal_id=animal.id) }}">
+            <input type="submit" value="Delete animal"/></form></td>
     </tr> 
   </table> 
 {% endfor %}

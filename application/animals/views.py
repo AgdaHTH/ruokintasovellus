@@ -31,6 +31,7 @@ def animals_show_animal(animal_id):
         animal = Animal.query.get(animal_id), foods = Food.find_foods(animal_id))
 
 @app.route("/animals/delete/<animal_id>", methods=["GET"])
+@login_required
 def animals_delete(animal_id):
     
     animal = Animal.query.get(animal_id)
@@ -93,4 +94,17 @@ def food_add(animal_id):
     db.session().add(food)
     db.session().commit()
 
+    return redirect(url_for("current_animals"))
+
+@app.route("/animals/<animal_id>/", methods=["POST"])
+def animals_set_sick(animal_id):
+
+    animal = Animal.query.get(animal_id)
+    if animal.sick == False:
+	    animal.sick = True
+    else:
+        animal.sick = False
+    
+    db.session().commit()
+  
     return redirect(url_for("current_animals"))
