@@ -8,15 +8,15 @@ class AnimalForm(FlaskForm):
         csrf = False
 
 class UserForm(FlaskForm):
-    name = StringField("Name", [validators.Length(min=2)])
-    username = StringField("Username", [validators.Length(min=2)])
-    password = StringField("Password", [validators.Length(min=2)])
+    name = StringField("Name", [validators.Length(min=30)])
+    username = StringField("Username", [validators.Length(min=2, max=30)])
+    password = StringField("Password", [validators.Length(min=2, max=20)])
 
     class Meta:
         csrf = False
 
 class FoodForm(FlaskForm):
-    name = StringField("New food:", [validators.Length(min=2)])
+    name = StringField("New food:", [validators.Length(min=2, max=20)])
 
     class Meta:
         csrf = False

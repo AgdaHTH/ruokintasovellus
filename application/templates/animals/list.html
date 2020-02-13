@@ -9,9 +9,7 @@
     {% for animal in animals %} 
     <tr>      
       <td>{{ animal.name }}</td> 
-      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
-      <td><form method="GET" action="{{ url_for('animals_delete', animal_id=animal.id) }}">
-      <input type="submit" value="Delete animal"/></form></td>     
+      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>     
     </tr>
     {% endfor %}
   
