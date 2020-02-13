@@ -86,8 +86,9 @@ def food_add(animal_id):
     if not form.validate():
         return render_template("animals/current.html", form = form)
 
+    animal = Animal.query.get(animal_id)
     food = Food(form.name.data)
-    food.animal_id = animal_id
+    food.animal = [animal]
     
     db.session().add(food)
     db.session().commit()

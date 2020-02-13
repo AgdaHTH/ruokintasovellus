@@ -47,7 +47,8 @@ class User(Base):
     @staticmethod
     def find_foods_of_current_user(account_id):
         stmt = text("SELECT Food.name FROM Food"
-        " LEFT JOIN Animal ON Animal.id = Food.animal_id"
+        " LEFT JOIN association ON association.food_id = Food.id"
+        " LEFT JOIN Animal ON Animal.id = association.animal_id" 
         " LEFT JOIN Account ON Account.id = Animal.account_id"
         " WHERE Account.id = :account_id"
         " GROUP BY Food.name").params(account_id=account_id)
