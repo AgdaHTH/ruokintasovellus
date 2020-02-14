@@ -13,11 +13,7 @@
 <table cellspacing="4" cellpadding="5">
     <tr>
       <td>{{ animal.name }}</td> 
-      {% if animal.sick == 1 %} 
-      <td>sick</td> 
-      {% else %}
-      <td>healthy</td>
-      {% endif %}
+      
       <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
       <td></td>
       <form method="POST" action="{{ url_for('food_add', animal_id=animal.id) }}">
@@ -32,6 +28,11 @@
           <input type="submit" value="Animal sick/healthy"/>
         </form>
             </td>
+            {% if animal.sick == 1 %} 
+            <td>sick</td> 
+            {% else %}
+            <td>healthy</td>
+            {% endif %}
         <td><form method="GET" action="{{ url_for('animals_delete', animal_id=animal.id) }}">
             <input type="submit" value="Delete animal"/></form></td>
     </tr> 
