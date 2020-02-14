@@ -9,5 +9,7 @@ sovelluksessa on myös mahdollisuus luoda uusia käyttäjiä)
 * Käyttötapaukset: https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/userstories.md
 * Tietokantakaavio: https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/tietokantakaavio.pdf
 
-* HUOM Sivujen asettelu on osittain kesken.
+* HUOM *Info for current user* -sivulla oleva ruokien listaus ei vielä toimi kunnolla. Se näyttää vain yhden 
+kutakin ruokaa syövän eläimen. 
+
 

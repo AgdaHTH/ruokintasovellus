@@ -10,13 +10,13 @@
          
     <tr>   
       {% for animal in animals %}   
-      <td>{{ animal.name }}</td> 
+      <td style="width:50px">{{ animal.name }}</td> 
       {% if animal.sick == True %}
-      <td>sick</td>
+      <td style="width:70px">sick</td>
       {% else %}
-      <td>healthy</td>
+      <td style="width:70px">healthy</td>
       {% endif %}
-      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal details</a></td>     
+      <td style="width:150px"><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal details</a></td>     
     </tr>
     {% endfor %}
   

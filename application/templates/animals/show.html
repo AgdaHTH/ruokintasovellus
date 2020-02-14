@@ -1,16 +1,15 @@
 {% extends "layout.html" %}
   
 {% block body %}
-
-<table cellspacing="4" cellpadding="5">
-  <tr>        
-    <th>Animal data</th>   
+<th><b>Animal data</b></th> 
+<table>
+  <tr>         
   </tr>
   <tr>
-    <td><b>Name</b></td>   
-    <td><b>Owner</b></td>
-    <td><b>Sick</b></td>
-    <td><b>Food</b></td>    
+    <td style="width:100px"><b>Name</b></td>   
+    <td style="width:100px"><b>Owner</b></td>
+    <td style="width:70px"><b>Sick</b></td>
+    <td style="width:100px"><b>Food</b></td>    
   </tr>
   <tr>       
     <td>{{ animal.name }}</td>   

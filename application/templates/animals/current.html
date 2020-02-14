@@ -10,11 +10,10 @@
 </table>
 
 {% for animal in currentanimals %}
-<table cellspacing="4" cellpadding="5">
+<table cellspacing="4" cellpadding="4">
     <tr>
-      <td>{{ animal.name }}</td> 
-      
-      <td><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
+      <td style="width:50px">{{ animal.name }}</td>      
+      <td style="width:100px"><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
       <td></td>
       <form method="POST" action="{{ url_for('food_add', animal_id=animal.id) }}">
         <td> {{ form.name.label }} </td>       
@@ -29,11 +28,11 @@
         </form>
             </td>
             {% if animal.sick == 1 %} 
-            <td>sick</td> 
+            <td style="width:60px">sick</td> 
             {% else %}
-            <td>healthy</td>
+            <td style="width:60px">healthy</td>
             {% endif %}
-        <td><form method="GET" action="{{ url_for('animals_delete', animal_id=animal.id) }}">
+        <td style="width:80px"><form method="GET" action="{{ url_for('animals_delete', animal_id=animal.id) }}">
             <input type="submit" value="Delete animal"/></form></td>
     </tr> 
   </table> 
@@ -49,6 +48,7 @@
     <table>
       <tr> 
         <td>{{ food.name }} </td>
+        <td>: {{ food.animal }}</td>      
       </tr>
     </table>
     {% endfor %}
