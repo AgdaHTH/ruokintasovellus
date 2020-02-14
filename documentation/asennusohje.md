@@ -7,4 +7,4 @@
 * Sovelluksen käyttöä on kuvailtu yksityiskohtaisesti käyttötapaukset-tiedostossa: 
 https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/userstories.md 
 
-*Sovellus toimii myös Heroku-palvelussa, jolloin sitä ei tarvitse asentaa omalle koneelle.
+* Sovellus toimii myös Heroku-palvelussa, jolloin sitä ei tarvitse asentaa omalle koneelle.
