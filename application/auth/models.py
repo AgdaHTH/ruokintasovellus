@@ -33,7 +33,7 @@ class User(Base):
     def find_animals_of_current_user(account_id):
         
         stmt = text("SELECT * FROM Animal" 
-        " JOIN Account ON Account.id = Animal.account_id" #tämä rivi on ilmeisesti turha
+        " JOIN Account ON Account.id = Animal.account_id" #tämä rivi on turha
         " WHERE account_id = :account_id").params(account_id=account_id)
         
         res = db.engine.execute(stmt)
@@ -46,7 +46,7 @@ class User(Base):
     
     @staticmethod
     def find_foods_of_current_user(account_id):
-        stmt = text("SELECT Food.name, Animal.name FROM Food"
+        stmt = text("SELECT Food.name FROM Food"
         " LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id"
         " LEFT JOIN Animal ON Animal.id = animalsfoods.animal_id" 
         " LEFT JOIN Account ON Account.id = Animal.account_id"
@@ -58,5 +58,5 @@ class User(Base):
         response = []
 
         for row in res:
-            response.append({"name":row[0], "animal":row[1]})
+            response.append({"name":row[0]})
         return response
