@@ -25,5 +25,16 @@
     <tr>      
     </tr>
 </table>
-
+{% if current_user.is_authenticated %}
+<table>
+  <tr><b>Available foods</b></tr>
+  {% for food in allfoods %}
+  <tr>
+    <td>{{ food.name }}</td>
+    <td><form method="POST" action="{{ url_for('food_add', animal_id=animal.id, food_id=food.id) }}">
+      <input type="submit" value="Add food"></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
 {% endblock %}

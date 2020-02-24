@@ -45,6 +45,19 @@ class User(Base):
         return response
     
     @staticmethod
+    def count_animals_of_current_user(account_id):
+
+        query1 = text("SELECT COUNT(Account.id) FROM Animal"
+        " LEFT JOIN Account ON Account.id = Animal.account_id"
+        " WHERE Animal.account_id = :account_id").params(account_id=account_id)
+
+        res = db.engine.execute(query1)
+        response = []
+        for row in res:
+            response.append({"count":row[0]})
+        return response
+
+    @staticmethod
     def find_foods_of_current_user(account_id):
         stmt = text("SELECT Food.name FROM Food"
         " LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id"

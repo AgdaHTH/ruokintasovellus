@@ -5,8 +5,7 @@ from sqlalchemy import Table, Column, Integer, ForeignKey
 
 animals_foods = db.Table('animalsfoods', Base.metadata,
     db.Column('animal_id', db.Integer, db.ForeignKey('animal.id')),
-    db.Column('food_id', db.Integer, db.ForeignKey('food.id'))
-)
+    db.Column('food_id', db.Integer, db.ForeignKey('food.id')))
 
 class Animal(Base):      
     name = db.Column(db.String(144), nullable=False)
@@ -14,7 +13,7 @@ class Animal(Base):
                            nullable=False)
     
     user = db.relationship("User", backref='animal', lazy=True) 
-    food = db.relationship("Food", secondary=animals_foods, back_populates='animal', lazy=True)
+    foods = db.relationship("Food", secondary=animals_foods, back_populates='animals', cascade="all", lazy='dynamic')
     sick = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name):
@@ -23,9 +22,8 @@ class Animal(Base):
     
 class Food(Base):
     name = db.Column(db.String(144), nullable = False)
-    animal = db.relationship("Animal", secondary=animals_foods, back_populates='food', lazy=True)
+    animals = db.relationship("Animal", secondary=animals_foods, back_populates='foods', cascade="all", lazy='dynamic')
     
-
     def __init__(self, name):
         self.name = name
             
@@ -45,5 +43,17 @@ class Food(Base):
             response.append({"name":row[0]})
         return response
     
-        
+    @staticmethod
+    def list_foods_and_animals(food_id):
+        query2 = text("SELECT Animal.name FROM Food"
+        " LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id"
+        " LEFT JOIN Animal ON Animal.id = animalsfoods.animal_id"
+        " WHERE Food.id = :food_id").params(food_id=food_id)
 
+        res = db.engine.execute(query2)
+
+        response = []
+
+        for row in res:
+            response.append({"name":row[0]})
+        return response

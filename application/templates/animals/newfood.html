@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 
-{% blockbody %}
+{% block body %}
 
+</table>
+<form method="POST" action="{{ url_for('add_food') }}">
+  <td> {{ form.name.label }} </td>       
+  <td> {{ form.name }}   </td>                                
+  <td colspan="2">
+    <input type="submit" value="Add a new food"/>
+  </td>          
+</form>
+<table>
 
 {% endblock %}

@@ -10,17 +10,21 @@ from application.animals.forms import AnimalForm, UserForm, FoodForm
 @app.route("/animals/current/", methods=["GET"])
 @login_required
 def current_animals():
-    
+        
     owner = current_user
-    omistajaid = owner.get_id()
+    omistajaid = owner.get_id()   
     
     return render_template("animals/current.html", form = FoodForm(), 
-        currentanimals = User.find_animals_of_current_user(omistajaid), currentfoods = User.find_foods_of_current_user(omistajaid))
+        currentanimals = User.find_animals_of_current_user(omistajaid), currentfoods = User.find_foods_of_current_user(omistajaid),
+        counts = User.count_animals_of_current_user(omistajaid))
 
 @app.route("/animals/", methods=["GET"])
 def animals_index():    
-    return render_template("animals/list.html", animals = Animal.query.all())
+    return render_template("animals/list.html", animals = Animal.query.all(), foods = Food.query.all())
 
+#@app.route("/animals/<food_id>/", methods=["GET"])
+#def foods_animals(food_id):    
+#    return render_template("animals/foods.html", animals = Food.list_foods_and_animals(food_id))
 
 @app.route("/animals/<animal_id>/", methods=["GET"])
 def animals_show_animal(animal_id):
@@ -28,7 +32,7 @@ def animals_show_animal(animal_id):
     animal = Animal.query.get(animal_id)
     
     return render_template("animals/show.html", owner = User.query.get(animal.account_id), 
-        animal = Animal.query.get(animal_id), foods = Food.find_foods(animal_id))
+        animal = Animal.query.get(animal_id), foods = Food.find_foods(animal_id), allfoods = Food.query.all())
 
 @app.route("/animals/delete/<animal_id>", methods=["GET"])
 @login_required
@@ -40,6 +44,16 @@ def animals_delete(animal_id):
     db.session().commit()
 
     return redirect(url_for("animals_index"))
+
+@app.route("/animals/food/delete/<food_id>") #GET?
+def foods_delete(food_id):
+    food = Food.query.get(food_id)
+
+    db.session().delete(food)
+    db.session().commit()
+
+    return redirect(url_for("animals_index"))
+
 
 @app.route("/animals/new/")
 @login_required
@@ -80,21 +94,52 @@ def users_create():
 
     return redirect(url_for("animals_index"))
 
-@app.route("/animals/newfood/<animal_id>", methods=["POST"])
-def food_add(animal_id):
+@app.route("/animals/newfood/", methods=["POST"])
+def add_food():
     form = FoodForm(request.form)
 
     if not form.validate():
         return render_template("animals/current.html", form = form)
-
-    animal = Animal.query.get(animal_id)
+   
     food = Food(form.name.data)
-    food.animal = [animal]
-    
+
     db.session().add(food)
     db.session().commit()
 
-    return redirect(url_for("current_animals"))
+    return redirect(url_for("animals_index"))
+
+@app.route("/animals/newfood/", methods=["GET"])
+def new_food_form():
+    return render_template("animals/newfood.html", form = FoodForm())
+
+
+@app.route("/animals/newfood/add/<animal_id>/<food_id>", methods=["POST"]) 
+def food_add(animal_id, food_id):
+    
+    #animal = db.session.query(Animal).get(animal_id)
+    #food = db.session.query(Food).get(food_id)
+    animal = Animal.query.get(animal_id)
+    food = Food.query.get(food_id)
+    
+
+    print("eläinnumero:")
+    print(animal_id)
+    print("ruokanumero:")
+    print(food_id)
+
+    #food.animals.append(animal)
+    db.session().add(food)
+    db.session().add(animal)
+
+    animal.foods.append(food)
+    #db.session().flush()    
+    db.session().commit()
+
+    return redirect(url_for("animals_show_animal", animal_id=animal.id))
+
+@app.route("/animals/foods/<food_id>")
+def show_animals_per_food(food_id):
+    return render_template("animals/foods.html", animals = Food.list_foods_and_animals(food_id))
 
 @app.route("/animals/<animal_id>/", methods=["POST"])
 def animals_set_sick(animal_id):

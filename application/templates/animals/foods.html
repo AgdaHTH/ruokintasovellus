@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<tr><b>Animals eating</b></tr>
+<table>
+{% for animal in animals %}
+<tr><td>{{animal.name}}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

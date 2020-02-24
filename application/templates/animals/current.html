@@ -4,24 +4,24 @@
 <table>
 <tr>
 <td>
-  <th>Animals of current user</th>
-</td>  
+  <b>Animals of current user:</b>
+</td> </tr>
+<tr>
+<td>Number of animals: </td> 
+
+{% for counte in counts %}
+  <td>{{ counte.count }}</td>
 </tr>
+{% endfor %}
 </table>
 
 {% for animal in currentanimals %}
 <table cellspacing="4" cellpadding="4">
     <tr>
-      <td style="width:50px">{{ animal.name }}</td>      
+      <td style="width:80px">{{ animal.name }}</td>      
       <td style="width:100px"><a href="{{ url_for('animals_show_animal', animal_id=animal.id) }}">Show animal</a></td>
-      <td></td>
-      <form method="POST" action="{{ url_for('food_add', animal_id=animal.id) }}">
-        <td> {{ form.name.label }} </td>       
-        <td> {{ form.name }}   </td>                                
-        <td colspan="2">
-          <input type="submit" value="Add a new food"/>
-        </td>          
-      </form>
+      <td></td>    
+
       <td>
         <form method="POST" action="{{ url_for('animals_set_sick', animal_id=animal.id) }}">
           <input type="submit" value="Animal sick/healthy"/>
@@ -37,10 +37,11 @@
     </tr> 
   </table> 
 {% endfor %}
+  
   <table>
     <tr>
     <td>
-      <th>Foods of animals of current user</th>
+      <th>Animals of current user eat:</th>
     </td>  
     </tr>
     </table>
