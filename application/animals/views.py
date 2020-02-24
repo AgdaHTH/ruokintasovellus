@@ -43,9 +43,9 @@ def animals_delete(animal_id):
     db.session().delete(animal)
     db.session().commit()
 
-    return redirect(url_for("animals_index"))
+    return redirect(url_for("current_animals"))
 
-@app.route("/animals/food/delete/<food_id>") #GET?
+@app.route("/animals/food/delete/<food_id>")
 def foods_delete(food_id):
     food = Food.query.get(food_id)
 
@@ -127,12 +127,10 @@ def food_add(animal_id, food_id):
     print("ruokanumero:")
     print(food_id)
 
-    #food.animals.append(animal)
     db.session().add(food)
     db.session().add(animal)
 
-    animal.foods.append(food)
-    #db.session().flush()    
+    animal.foods.append(food)  
     db.session().commit()
 
     return redirect(url_for("animals_show_animal", animal_id=animal.id))

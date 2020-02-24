@@ -13,7 +13,7 @@ class Animal(Base):
                            nullable=False)
     
     user = db.relationship("User", backref='animal', lazy=True) 
-    foods = db.relationship("Food", secondary=animals_foods, back_populates='animals', cascade="all", lazy='dynamic')
+    foods = db.relationship("Food", secondary=animals_foods, back_populates='animals', lazy='dynamic')
     sick = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name):
@@ -22,11 +22,20 @@ class Animal(Base):
     
 class Food(Base):
     name = db.Column(db.String(144), nullable = False)
-    animals = db.relationship("Animal", secondary=animals_foods, back_populates='foods', cascade="all", lazy='dynamic')
+    animals = db.relationship("Animal", secondary=animals_foods, back_populates='foods', lazy='dynamic')
+    #price = db.Column(db.Integer, nullable = True)
     
     def __init__(self, name):
         self.name = name
-            
+
+    #@staticmethod
+    #def set_price(food_id, newprice):
+    #    price = text("UPDATE Food"
+    #    " SET price = :newprice"
+    #    " WHERE id = :food_id").params(food_id=food_id, newprice=newprice)
+
+    #    db.engine.execute(price)
+
     @staticmethod
     def find_foods(animal_id):
         stmt = text("SELECT Food.name FROM Food"

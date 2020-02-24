@@ -32,7 +32,7 @@
   <tr>
     <td>{{ food.name }}</td>
     <td><form method="POST" action="{{ url_for('food_add', animal_id=animal.id, food_id=food.id) }}">
-      <input type="submit" value="Add food"></td>
+      <input type="submit" value="Add food"></form></td>
   </tr>
   {% endfor %}
 </table>
