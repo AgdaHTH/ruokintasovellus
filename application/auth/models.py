@@ -56,6 +56,21 @@ class User(Base):
         for row in res:
             response.append({"count":row[0]})
         return response
+    
+    @staticmethod
+    def average_of_food_prices(account_id):
+        query2 = text("SELECT AVG(Food.price) FROM Food"
+        " LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id"
+        " LEFT JOIN Animal ON Animal.id = animalsfoods.animal_id" 
+        " LEFT JOIN Account ON Account.id = Animal.account_id"
+        " WHERE Account.id = :account_id").params(account_id=account_id)
+    
+        res = db.engine.execute(query2)
+        response = []
+
+        for row in res:
+            response.append({"average":row[0]})
+        return response
 
     @staticmethod
     def find_foods_of_current_user(account_id):

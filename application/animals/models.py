@@ -21,20 +21,20 @@ class Animal(Base):
         self.sick = False      
     
 class Food(Base):
-    name = db.Column(db.String(144), nullable = False)
+    name = db.Column(db.String(144), unique=True, nullable = False) #unique lisätty
     animals = db.relationship("Animal", secondary=animals_foods, back_populates='foods', lazy='dynamic')
-    #price = db.Column(db.Integer, nullable = True)
+    price = db.Column(db.Integer, nullable = True)
     
     def __init__(self, name):
         self.name = name
 
-    #@staticmethod
-    #def set_price(food_id, newprice):
-    #    price = text("UPDATE Food"
-    #    " SET price = :newprice"
-    #    " WHERE id = :food_id").params(food_id=food_id, newprice=newprice)
+    @staticmethod
+    def set_price(food_id, newprice):
+        price = text("UPDATE Food"
+        " SET price = :newprice"
+        " WHERE id = :food_id").params(food_id=food_id, newprice=newprice)
 
-    #    db.engine.execute(price)
+        db.engine.execute(price)
 
     @staticmethod
     def find_foods(animal_id):

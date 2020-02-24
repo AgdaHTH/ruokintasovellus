@@ -40,7 +40,11 @@
   
   <table>
     <tr>
-    <td>
+      <th>Average price of foods:</th>
+        {% for avg in average %}
+        <td>{{ avg.average }}</td>
+      </tr>
+        {% endfor %}
       <th>Animals of current user eat:</th>
     </td>  
     </tr>

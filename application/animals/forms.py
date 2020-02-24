@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, validators
+from wtforms import StringField, IntegerField, validators
 
 class AnimalForm(FlaskForm):
     name = StringField("Animal name", [validators.Length(min=2, max=30)])
@@ -17,6 +17,12 @@ class UserForm(FlaskForm):
 
 class FoodForm(FlaskForm):
     name = StringField("New food:", [validators.Length(min=2, max=20)])
+
+    class Meta:
+        csrf = False
+
+class PriceForm(FlaskForm):
+    price = IntegerField("New price:", [validators.NumberRange(min=1, max=100, message=True)])
 
     class Meta:
         csrf = False

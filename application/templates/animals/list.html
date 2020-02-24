@@ -22,19 +22,21 @@
   </table>
   <table>
     <tr>        
-      <td><b>All foods</b></td>   
+      <td style="width:100px"><b>All foods</b></td>
+      <td style="width:150px"><a href="{{ url_for('new_food_form') }}">Add a new food</a></td>   
     </tr>         
        
       {% for food in foods %}   
         <tr><td>{{ food.name }}</td>
-          <td><a href="{{ url_for('show_animals_per_food', food_id=food.id)}}">See animals</a></td>
+          <td style="width:150px"><a href="{{ url_for('show_food', food_id=food.id)}}">Show food details</a></td>
+          <td style="width:100px"><a href="{{ url_for('show_update_food', food_id=food.id)}}">Edit food</a></td>
+          <td style="width:100px"><a href="{{ url_for('show_animals_per_food', food_id=food.id)}}">See animals</a></td>
           <td><form method="GET" action="{{ url_for('foods_delete', food_id=food.id) }}">
             <input type="submit" value="Delete food"/></form></td>
         </tr>
       {% endfor %}  
   </table>
   <table>
-    <a href="{{ url_for('new_food_form') }}">Add a new food</a>
-    
+      
   </table>
 {% endblock %}

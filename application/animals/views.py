@@ -5,26 +5,22 @@ from flask_login import login_required, current_user
 from application.animals.models import Animal
 from application.animals.models import Food
 from application.auth.models import User
-from application.animals.forms import AnimalForm, UserForm, FoodForm
+from application.animals.forms import AnimalForm, UserForm, FoodForm, PriceForm
 
 @app.route("/animals/current/", methods=["GET"])
 @login_required
 def current_animals():
         
     owner = current_user
-    omistajaid = owner.get_id()   
+    owner_id = owner.get_id()   
     
     return render_template("animals/current.html", form = FoodForm(), 
-        currentanimals = User.find_animals_of_current_user(omistajaid), currentfoods = User.find_foods_of_current_user(omistajaid),
-        counts = User.count_animals_of_current_user(omistajaid))
+        currentanimals = User.find_animals_of_current_user(owner_id), currentfoods = User.find_foods_of_current_user(owner_id),
+        counts = User.count_animals_of_current_user(owner_id), average = User.average_of_food_prices(owner_id))
 
 @app.route("/animals/", methods=["GET"])
 def animals_index():    
     return render_template("animals/list.html", animals = Animal.query.all(), foods = Food.query.all())
-
-#@app.route("/animals/<food_id>/", methods=["GET"])
-#def foods_animals(food_id):    
-#    return render_template("animals/foods.html", animals = Food.list_foods_and_animals(food_id))
 
 @app.route("/animals/<animal_id>/", methods=["GET"])
 def animals_show_animal(animal_id):
@@ -116,16 +112,8 @@ def new_food_form():
 @app.route("/animals/newfood/add/<animal_id>/<food_id>", methods=["POST"]) 
 def food_add(animal_id, food_id):
     
-    #animal = db.session.query(Animal).get(animal_id)
-    #food = db.session.query(Food).get(food_id)
     animal = Animal.query.get(animal_id)
     food = Food.query.get(food_id)
-    
-
-    print("eläinnumero:")
-    print(animal_id)
-    print("ruokanumero:")
-    print(food_id)
 
     db.session().add(food)
     db.session().add(animal)
@@ -138,6 +126,30 @@ def food_add(animal_id, food_id):
 @app.route("/animals/foods/<food_id>")
 def show_animals_per_food(food_id):
     return render_template("animals/foods.html", animals = Food.list_foods_and_animals(food_id))
+
+@app.route("/animals/showfood/<food_id>")
+def show_food(food_id):
+    
+    return render_template("animals/showfood.html", food = Food.query.get(food_id))
+
+@app.route("/animals/updatefood/<food_id>")
+def show_update_food(food_id):
+    form = PriceForm(request.form)
+    return render_template("animals/updatefood.html", food = Food.query.get(food_id), form=form)
+
+@app.route("/animals/updatefood/<food_id>/", methods=["POST"])
+def update_food(food_id): #eihän tuota newprice varmaan tarvita koska sehän tulee formista
+    form = PriceForm(request.form) #NB tuolla voi olla väärin sen integerfield tms.
+
+    if not form.validate():
+        return render_template("animals/updatefood.html", form = form)
+
+    newprice = form.price.data #onkohan näin?
+    Food.set_price(food_id, newprice)
+
+    db.session().commit()
+
+    return redirect(url_for("animals_index"))    
 
 @app.route("/animals/<animal_id>/", methods=["POST"])
 def animals_set_sick(animal_id):
