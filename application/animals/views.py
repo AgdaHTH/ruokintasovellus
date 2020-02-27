@@ -136,8 +136,7 @@ def show_animals_per_food(food_id):
     return render_template("animals/foods.html", animals = Food.list_foods_and_animals(food_id))
 
 @app.route("/animals/showfood/<food_id>")
-def show_food(food_id):
-    
+def show_food(food_id):    
     return render_template("animals/showfood.html", food = Food.query.get(food_id))
 
 @app.route("/animals/updatefood/<food_id>")
@@ -150,15 +149,15 @@ def update_food(food_id):
     form = PriceForm(request.form)
 
     if not form.validate():
-        print("Ei onnistunut")
         return render_template("animals/updatefood.html", form = form, food = Food.query.get(food_id))
 
     newprice = form.price.data
     Food.set_price(food_id, newprice)
-
+    
     db.session().commit()
 
-    return redirect(url_for("animals_index"))    
+    food = Food.query.get(food_id)
+    return redirect(url_for("show_food", food_id=food.id))
 
 @app.route("/animals/<animal_id>/", methods=["POST"])
 def animals_set_sick(animal_id):
