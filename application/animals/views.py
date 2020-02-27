@@ -93,11 +93,19 @@ def users_create():
 @app.route("/animals/newfood/", methods=["POST"])
 def add_food():
     form = FoodForm(request.form)
-
+    
     if not form.validate():
-        return render_template("animals/current.html", form = form)
+        return render_template("animals/newfood.html", form = form)
    
     food = Food(form.name.data)
+    allfoods = Food.query.all()
+    loytyiko = 1
+    for oldfood in allfoods:
+        if oldfood.name == food.name:
+            loytyiko = 2
+
+    if loytyiko == 2:
+        return render_template("animals/newfood.html", form = form, error = "Food already exists")
 
     db.session().add(food)
     db.session().commit()
