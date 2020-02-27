@@ -88,7 +88,7 @@ def users_create():
     db.session().add(user)
     db.session().commit()
 
-    return redirect(url_for("auth_login")) #oli animals_index
+    return redirect(url_for("auth_login"))
 
 @app.route("/animals/newfood/", methods=["POST"])
 def add_food():
@@ -146,13 +146,14 @@ def show_update_food(food_id):
     return render_template("animals/updatefood.html", food = Food.query.get(food_id), form=form)
 
 @app.route("/animals/updatefood/<food_id>/", methods=["POST"])
-def update_food(food_id): #eihän tuota newprice varmaan tarvita koska sehän tulee formista
-    form = PriceForm(request.form) #NB tuolla voi olla väärin sen integerfield tms.
+def update_food(food_id):
+    form = PriceForm(request.form)
 
     if not form.validate():
-        return render_template("animals/updatefood.html", form = form)
+        print("Ei onnistunut")
+        return render_template("animals/updatefood.html", form = form, food = Food.query.get(food_id))
 
-    newprice = form.price.data #onkohan näin?
+    newprice = form.price.data
     Food.set_price(food_id, newprice)
 
     db.session().commit()

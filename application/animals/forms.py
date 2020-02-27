@@ -22,7 +22,7 @@ class FoodForm(FlaskForm):
         csrf = False
 
 class PriceForm(FlaskForm):
-    price = IntegerField("New price:", [validators.NumberRange(min=1, max=100, message=True)])
+    price = IntegerField("New price:", [validators.NumberRange(min=1, max=100)])
 
     class Meta:
         csrf = False
