@@ -22,7 +22,7 @@ def auth_login():
     login_user(user)
 
     print("Käyttäjä " + user.name + " tunnistettiin")
-    return redirect(url_for("index")) 
+    return redirect(url_for("current_animals")) 
 
 @app.route("/auth/logout")
 def auth_logout():

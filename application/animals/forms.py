@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, validators
+from wtforms import StringField, IntegerField, PasswordField, validators
 
 class AnimalForm(FlaskForm):
     name = StringField("Animal name", [validators.Length(min=2, max=30)])
@@ -10,7 +10,7 @@ class AnimalForm(FlaskForm):
 class UserForm(FlaskForm):
     name = StringField("Name", [validators.Length(min=2, max=30)])
     username = StringField("Username", [validators.Length(min=2, max=30)])
-    password = StringField("Password", [validators.Length(min=2, max=20)])
+    password = PasswordField("Password", [validators.Length(min=2, max=20)])
 
     class Meta:
         csrf = False

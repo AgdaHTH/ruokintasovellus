@@ -88,7 +88,7 @@ def users_create():
     db.session().add(user)
     db.session().commit()
 
-    return redirect(url_for("animals_index"))
+    return redirect(url_for("auth_login")) #oli animals_index
 
 @app.route("/animals/newfood/", methods=["POST"])
 def add_food():
