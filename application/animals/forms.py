@@ -7,14 +7,6 @@ class AnimalForm(FlaskForm):
     class Meta:
         csrf = False
 
-class UserForm(FlaskForm):
-    name = StringField("Name", [validators.Length(min=2, max=30)])
-    username = StringField("Username", [validators.Length(min=2, max=30)])
-    password = PasswordField("Password", [validators.Length(min=2, max=20)])
-
-    class Meta:
-        csrf = False
-
 class FoodForm(FlaskForm):
     name = StringField("New food:", [validators.Length(min=2, max=20)])
 

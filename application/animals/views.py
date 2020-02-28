@@ -56,10 +56,6 @@ def foods_delete(food_id):
 def animals_form():
     return render_template("animals/new.html", form = AnimalForm())
 
-@app.route("/animals/newuser/")
-def animals_userform():
-    return render_template("animals/newuser.html", form = UserForm())
-
 @app.route("/animals/", methods=["POST"])
 @login_required
 def animals_create():
@@ -76,19 +72,7 @@ def animals_create():
   
     return redirect(url_for("animals_index"))
 
-@app.route("/animals/newuser/", methods=["POST"])
-def users_create():
-    form = UserForm(request.form)
 
-    if not form.validate():
-        return render_template("animals/newuser.html", form = form)
-
-    user = User(form.name.data, form.username.data, form.password.data)
-        
-    db.session().add(user)
-    db.session().commit()
-
-    return redirect(url_for("auth_login"))
 
 @app.route("/animals/newfood/", methods=["POST"])
 def add_food():
