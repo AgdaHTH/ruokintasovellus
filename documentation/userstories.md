@@ -14,7 +14,9 @@ vain oman eläimensä tietoja. Nykyisessä muodossaan sovelluksessa ei ole tarvetta
 eläimen välilehdeltä *Add an animal*.
 
 * Alasivulta *Show animal details* kirjautunut käyttäjä (eli eläimen omistaja) näkee kyseisen eläimen tiedot ja voi
-lisätä eläimelleen syötettävän ruuan.
+lisätä eläimelleen syötettävän ruuan. HUOM! Tällä hetkellä on mahdollista lisätä sama ruoka yhdelle eläimelle monta 
+kertaa, vaikka näin ei tietenkään pitäisi voida tapahtua. Ruoka näkyy eläimen tiedoissa vain kerran, mutta ruuan
+kohdalla sama eläin näkyy monta kertaa, ja sekä kyseisen ruuan että eläimen poistaminen tietokannasta epäonnistuu.
 
 * Välilehdellä *Info for current user* omistaja näkee näkee yhteenvedon eläimiään koskevista tiedoista. 
 
