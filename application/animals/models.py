@@ -21,7 +21,7 @@ class Animal(Base):
         self.sick = False      
     
 class Food(Base):
-    name = db.Column(db.String(144), unique=True, nullable = False) #unique lisätty
+    name = db.Column(db.String(144), unique=True, nullable = False)
     animals = db.relationship("Animal", secondary=animals_foods, back_populates='foods', lazy='dynamic')
     price = db.Column(db.Integer, nullable = True)
     

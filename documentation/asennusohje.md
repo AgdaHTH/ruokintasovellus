@@ -1,10 +1,15 @@
 # Asennusohje
 
-* Projektin tarvitsemat riippuvuudet löytyvät tiedostosta requirements.txt, josta ne voi asentaa tarvittaessa.
+* Sovelluksen käyttämistä varten koneella tulee olla asennettuna python3 sekä Pythonin pip.
 
-* Sovelluksen toimintaa varten pitää asentaa Pythonin virtuaaliympäristö *venv* projektin juurikansioon.
+* Sovelluksen toimintaa varten tulee asentaa Pythonin virtuaaliympäristö projektin juurikansioon komennolla 
+`python3 -m venv venv`
 
-* Sovelluksen käyttöä on kuvailtu yksityiskohtaisesti käyttötapaukset-tiedostossa: 
-https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/userstories.md 
+* Projektin tarvitsemat riippuvuudet löytyvät tiedostosta [requirements.txt](../blob/master/requirements.txt), 
+josta ne voi asentaa pipin avulla: `pip install -r requirements.txt`
 
-* Sovellus toimii myös Heroku-palvelussa, jolloin sitä ei tarvitse asentaa omalle koneelle.
+* Sovelluksen käyttöä on kuvailtu yksityiskohtaisesti [käyttötapaukset-tiedostossa] 
+(../blob/master/documentation/userstories.md)
+
+* Sovellus toimii myös [Heroku-palvelussa](https://ruokintasovellus.herokuapp.com/), 
+jolloin sitä ei tarvitse asentaa omalle koneelle.

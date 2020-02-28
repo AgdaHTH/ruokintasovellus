@@ -10,7 +10,6 @@ class User(Base):
     password = db.Column(db.String(144), nullable=False)
 
     animals = db.relationship("Animal", backref='account', lazy=True)
-    #back_populates="account" myös mahd
 
     def __init__(self, name, username, password):
         self.name = name
@@ -33,7 +32,7 @@ class User(Base):
     def find_animals_of_current_user(account_id):
         
         stmt = text("SELECT * FROM Animal" 
-        " JOIN Account ON Account.id = Animal.account_id" #tämä rivi on turha
+        " JOIN Account ON Account.id = Animal.account_id"
         " WHERE account_id = :account_id").params(account_id=account_id)
         
         res = db.engine.execute(stmt)
