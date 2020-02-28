@@ -5,9 +5,9 @@ Eläintenruokinnassa (tai vastaavassa) käytettävä sovellus, jossa omistajat (
 voivat päivittää oman huollettavansa tietoja ja käyttäjät (ruokkijat/huoltajat) lukea niitä. 
 Tietokanta sisältää tiedot joukosta eläimiä, niiden omistajista sekä kunkin eläimen ruokinnasta ja terveydetilasta.
 
-   [Tietokannan kuvaus](../tree/master/documentation/database.md)  
-   [Käyttötapaukset](../tree/master/documentation/userstories.md)  
-   [Asennusohje](../tree/master/documentation/asennusohje.md)  
-   [Sovellus Herokussa] (https://ruokintasovellus.herokuapp.com/)     
+   [Tietokannan kuvaus](https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/database.md)  
+   [Käyttötapaukset](https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/userstories.md)  
+   [Asennusohje](https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/asennusohje.md)  
+   [Sovellus Herokussa](https://ruokintasovellus.herokuapp.com/)     
    
 
