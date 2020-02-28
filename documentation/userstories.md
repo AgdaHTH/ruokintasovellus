@@ -19,7 +19,7 @@ lisätä eläimelleen syötettävän ruuan.
 * Välilehdellä *Info for current user* omistaja näkee näkee yhteenvedon eläimiään koskevista tiedoista. 
 
 * Siellä hän voi myös merkitä jos eläin on sairaana sekä poistaa eläimen tiedot tietokannasta. 
-Huomaa, että Delete animal -nappi poistaa eläimen tiedot välittömästi.
+Huomaa, että *Delete animal* -nappi poistaa eläimen tiedot välittömästi.
 
 * Sivulla *Info for current user* omistaja näkee, montako eläintä hänellä on ja mikä on eläinten syömien
 ruokien hintojen keskiarvo. Lisäksi omistaja näkee yhteenvedon siitä, mitä ruokia hänen eläimensä syövät.
