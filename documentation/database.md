@@ -1,15 +1,10 @@
+Database organization
+
 ![alt text][picture]
 
 [picture]: https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/database.png
 
-    CREATE TABLE food (
-        id INTEGER NOT NULL,
-        date_created DATETIME,
-        date_modified DATETIME,
-        name VARCHAR(144) NOT NULL,
-        price INTEGER,
-        PRIMARY KEY (id),
-        UNIQUE (name))
+    
 
     CREATE TABLE account (
         id INTEGER NOT NULL,
@@ -30,6 +25,15 @@
         PRIMARY KEY (id),
         FOREIGN KEY(account_id) REFERENCES account (id),
         CHECK (sick IN (0, 1)))
+    
+    CREATE TABLE food (
+        id INTEGER NOT NULL,
+        date_created DATETIME,
+        date_modified DATETIME,
+        name VARCHAR(144) NOT NULL,
+        price INTEGER,
+        PRIMARY KEY (id),
+        UNIQUE (name))
 
     CREATE TABLE animalsfoods (
         animal_id INTEGER,

@@ -16,18 +16,19 @@ eläimen välilehdeltä *Add an animal*.
 * Alasivulta *Show animal details* kirjautunut käyttäjä (eli eläimen omistaja) näkee kyseisen eläimen tiedot ja voi
 lisätä eläimelleen syötettävän ruuan.
 
-Kirjautuneena omistaja voi selata yhteenvetoa eläimiään koskevista tiedoista välilehdellä *Info for current user*: 
+* Välilehdellä *Info for current user* omistaja näkee näkee yhteenvedon eläimiään koskevista tiedoista. 
+
+* Siellä hän voi myös merkitä jos eläin on sairaana sekä poistaa eläimen tiedot tietokannasta. 
+Huomaa, että Delete animal -nappi poistaa eläimen tiedot välittömästi.
+
+* Sivulla *Info for current user* omistaja näkee, montako eläintä hänellä on ja mikä on eläinten syömien
+ruokien hintojen keskiarvo. Lisäksi omistaja näkee yhteenvedon siitä, mitä ruokia hänen eläimensä syövät.
+
+Kirjautuneen käyttäjän eläimet:
 
     "SELECT * FROM Animal 
          JOIN Account ON Account.id = Animal.account_id
          WHERE account_id = :account_id"
-
-Siellä hän voi myös merkitä jos eläin on sairaana sekä poistaa eläimen tiedot tietokannasta. 
-Huomaa, että Delete animal -nappi poistaa eläimen tiedot välittömästi. 
- 
-Sivulla *Info for current user* omistaja näkee, montako eläintä hänellä on ja mikä on eläinten syömien
-ruokien hintojen keskiarvo. Lisäksi omistaja näkee yhteenvedon siitä, 
-mitä ruokia hänen eläimensä syövät.
 
 Kirjautuneen käyttäjän eläinten lukumäärä:
 
@@ -60,17 +61,16 @@ järjestelmään.
 
 * Etusivulle listautuvat myös kaikki tietokannasta löytyvät ruuat, joiden hintatietoja voi katsella sivulta
 *Show food details*.
+
+* Linkistä *Add a new food* pääsee lisäämään tietokantaan uuden ruuan (ruokien nimet ovat uniikkeja, joten sovellus ei hyväksy toista samannimistä ruokaa).
+
+* Ruuan voi poistaa kohdasta *Delete food*. 
  
 Hintatietoja voi muuttaa sivulta *Edit food*:  
 
     "UPDATE Food
          SET price = :newprice
          WHERE id = :food_id"
-
-
-* Ruuan voi poistaa kohdasta *Delete food*. 
-
-* Linkistä *Add a new food* pääsee lisäämään tietokantaan uuden ruuan (ruokien nimet ovat uniikkeja, joten sovellus ei hyväksy toista samannimistä ruokaa).
 
 Etusivun linkistä *Show animals* näkee kutakin ruokaa syövät eläimet:
 
