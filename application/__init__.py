@@ -24,6 +24,7 @@ from application import views
 
 from application.animals import models
 from application.animals import views
+from application.foods import views
 
 from application.auth import models
 from application.auth import views

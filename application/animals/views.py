@@ -5,7 +5,8 @@ from flask_login import login_required, current_user
 from application.animals.models import Animal
 from application.animals.models import Food
 from application.auth.models import User
-from application.animals.forms import AnimalForm, FoodForm, PriceForm
+from application.animals.forms import AnimalForm
+from application.foods.forms import FoodForm, PriceForm
 from application.auth.forms import UserForm
 
 @app.route("/animals/current/", methods=["GET"])
@@ -20,7 +21,8 @@ def current_animals():
         counts = User.count_animals_of_current_user(owner_id), average = User.average_of_food_prices(owner_id))
 
 @app.route("/animals/", methods=["GET"])
-def animals_index():    
+def animals_index():
+    print("animals_index kutsuttiin")    
     return render_template("animals/list.html", animals = Animal.query.all(), foods = Food.query.all())
 
 @app.route("/animals/<animal_id>/", methods=["GET"])
@@ -41,16 +43,6 @@ def animals_delete(animal_id):
     db.session().commit()
 
     return redirect(url_for("current_animals"))
-
-@app.route("/animals/food/delete/<food_id>")
-def foods_delete(food_id):
-    food = Food.query.get(food_id)
-
-    db.session().delete(food)
-    db.session().commit()
-
-    return redirect(url_for("animals_index"))
-
 
 @app.route("/animals/new/")
 @login_required
@@ -73,35 +65,6 @@ def animals_create():
   
     return redirect(url_for("animals_index"))
 
-
-
-@app.route("/animals/newfood/", methods=["POST"])
-def add_food():
-    form = FoodForm(request.form)
-    
-    if not form.validate():
-        return render_template("animals/newfood.html", form = form)
-   
-    food = Food(form.name.data)
-    allfoods = Food.query.all()
-    loytyiko = 1
-    for oldfood in allfoods:
-        if oldfood.name == food.name:
-            loytyiko = 2
-
-    if loytyiko == 2:
-        return render_template("animals/newfood.html", form = form, error = "Food already exists")
-
-    db.session().add(food)
-    db.session().commit()
-
-    return redirect(url_for("animals_index"))
-
-@app.route("/animals/newfood/", methods=["GET"])
-def new_food_form():
-    return render_template("animals/newfood.html", form = FoodForm())
-
-
 @app.route("/animals/newfood/add/<animal_id>/<food_id>", methods=["POST"]) 
 def food_add(animal_id, food_id):
     
@@ -118,31 +81,7 @@ def food_add(animal_id, food_id):
 
 @app.route("/animals/foods/<food_id>")
 def show_animals_per_food(food_id):
-    return render_template("animals/foods.html", animals = Food.list_foods_and_animals(food_id))
-
-@app.route("/animals/showfood/<food_id>")
-def show_food(food_id):    
-    return render_template("animals/showfood.html", food = Food.query.get(food_id))
-
-@app.route("/animals/updatefood/<food_id>")
-def show_update_food(food_id):
-    form = PriceForm(request.form)
-    return render_template("animals/updatefood.html", food = Food.query.get(food_id), form=form)
-
-@app.route("/animals/updatefood/<food_id>/", methods=["POST"])
-def update_food(food_id):
-    form = PriceForm(request.form)
-
-    if not form.validate():
-        return render_template("animals/updatefood.html", form = form, food = Food.query.get(food_id))
-
-    newprice = form.price.data
-    Food.set_price(food_id, newprice)
-    
-    db.session().commit()
-
-    food = Food.query.get(food_id)
-    return redirect(url_for("show_food", food_id=food.id))
+    return render_template("foods/foods.html", animals = Food.list_foods_and_animals(food_id))
 
 @app.route("/animals/<animal_id>/", methods=["POST"])
 def animals_set_sick(animal_id):
