@@ -1,4 +1,4 @@
-# Database organization
+## Database organization
 
 
 ![alt text][picture]

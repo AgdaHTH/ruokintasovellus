@@ -1,4 +1,4 @@
-# Asennusohje
+## Asennusohje
 
 * Sovelluksen käyttämistä varten koneella tulee olla asennettuna python3 sekä Pythonin pip.
 
@@ -8,8 +8,7 @@
 * Projektin tarvitsemat riippuvuudet löytyvät tiedostosta [requirements.txt](../blob/master/requirements.txt), 
 josta ne voi asentaa pipin avulla: `pip install -r requirements.txt`
 
-* Sovelluksen käyttöä on kuvailtu yksityiskohtaisesti [käyttötapaukset-tiedostossa] 
-(../blob/master/documentation/userstories.md)
+* Sovelluksen käyttöä on kuvailtu yksityiskohtaisesti [käyttötapaukset-tiedostossa](https://github.com/AgdaHTH/ruokintasovellus/blob/master/documentation/userstories.md)
 
 * Sovellus toimii myös [Heroku-palvelussa](https://ruokintasovellus.herokuapp.com/), 
 jolloin sitä ei tarvitse asentaa omalle koneelle.
