@@ -6,7 +6,7 @@ Autorisointi toimii t‰ll‰ hetkell‰ niin, ett‰ yhdelle k‰ytt‰j‰tyypille (el‰imen 
 kirjautua sis‰‰n sovellukseen ja toiminnallisuus m‰‰rittyy t‰m‰n perusteella. Kukin omistaja p‰‰see p‰ivitt‰m‰‰n 
 vain oman el‰imens‰ tietoja. Nykyisess‰ muodossaan sovelluksessa ei ole tarvetta admin-tasoiselle k‰ytt‰j‰lle.
 
-### Seuraavat toiminnot ovat mahdollisia * el‰imen omistajalle *: 
+### Seuraavat toiminnot ovat mahdollisia *el‰imen omistajalle*: 
 
 * El‰imen omistaja voi luoda itselleen profiilin j‰rjestelm‰‰n v‰lilehdelt‰ *Register*.
 
@@ -37,7 +37,7 @@ Kirjautuneen k‰ytt‰j‰n el‰inten lukum‰‰r‰:
 
 Kirjautuneen k‰ytt‰j‰n el‰inten syˆmien ruokien hintojen keskiarvo:
 
-    "SELECT AVG(Food.price) FROM Food"
+    "SELECT AVG(Food.price) FROM Food
          LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id
          LEFT JOIN Animal ON Animal.id = animalsfoods.animal_id 
          LEFT JOIN Account ON Account.id = Animal.account_id
@@ -67,18 +67,21 @@ Hintatietoja voi muuttaa sivulta *Edit food*:
          SET price = :newprice
          WHERE id = :food_id"
 
-Ruuan voi poistaa kohdasta *Delete food*. Linkist‰ *Add a new food* p‰‰see lis‰‰m‰‰n tietokantaan uuden ruuan (ruokien nimet ovat uniikkeja, joten sovellus ei hyv‰ksy toista samannimist‰ ruokaa).
+
+* Ruuan voi poistaa kohdasta *Delete food*. 
+
+* Linkist‰ *Add a new food* p‰‰see lis‰‰m‰‰n tietokantaan uuden ruuan (ruokien nimet ovat uniikkeja, joten sovellus ei hyv‰ksy toista samannimist‰ ruokaa).
 
 Etusivun linkist‰ *Show animals* n‰kee kutakin ruokaa syˆv‰t el‰imet:
 
     "SELECT Animal.name FROM Food
-         LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id"
+         LEFT JOIN animalsfoods ON animalsfoods.food_id = Food.id
          LEFT JOIN Animal ON Animal.id = animalsfoods.animal_id
          WHERE Food.id = :food_id"
 
-El‰inten hoitajalle eli kirjautumattomalle k‰ytt‰j‰lle Alasivu *Show animal details* n‰ytt‰‰ el‰imen 
- 
- nimen  
- omistajan nimen   
- el‰imen terveydentilan  
- el‰imelle syˆtett‰v‰t ruuat  
+El‰inten hoitajalle eli kirjautumattomalle k‰ytt‰j‰lle alasivu *Show animal details* n‰ytt‰‰ el‰imen 
+
+   nimen  
+   omistajan nimen   
+   el‰imen terveydentilan  
+   el‰imelle syˆtett‰v‰t ruuat  
