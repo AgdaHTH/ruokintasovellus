@@ -5,7 +5,8 @@ from flask_login import login_required, current_user
 from application.animals.models import Animal
 from application.animals.models import Food
 from application.auth.models import User
-from application.animals.forms import AnimalForm, UserForm, FoodForm, PriceForm
+from application.animals.forms import AnimalForm, FoodForm, PriceForm
+from application.auth.forms import UserForm
 
 @app.route("/animals/current/", methods=["GET"])
 @login_required
