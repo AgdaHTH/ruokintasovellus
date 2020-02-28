@@ -64,7 +64,9 @@ j‰rjestelm‰‰n.
 
 * Linkist‰ *Add a new food* p‰‰see lis‰‰m‰‰n tietokantaan uuden ruuan (ruokien nimet ovat uniikkeja, joten sovellus ei hyv‰ksy toista samannimist‰ ruokaa).
 
-* Ruuan voi poistaa kohdasta *Delete food*. 
+* Ruuan voi poistaa kohdasta *Delete food*. HUOM! T‰m‰ komento poistaa ruuan kokonaan tietokannasta,
+eli kaikilta el‰imilt‰. Sovelluksessa on viel‰ toteuttamatta toiminnallisuus, joka mahdollistaisi ruuan poistamisen
+vain tietylt‰ el‰imelt‰.
  
 Hintatietoja voi muuttaa sivulta *Edit food*:  
 
